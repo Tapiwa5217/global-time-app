@@ -20,7 +20,7 @@ let newOptionClass = document.getElementsByClassName('new-option-class');
 //load timezone options upon page loading
 window.onload = () => {
 
-         fetch('https://worldtimeapi.org/api/timezone',{referrerPolicy: "unsafe_url"})
+         fetch('https://worldtimeapi.org/api/timezone')
          .then((res) => { return res.json(); })
          .then((data) => {   
 
@@ -45,7 +45,7 @@ window.onload = () => {
 
 let newTimeZoneData = () => {
 
-    fetch('https://worldtimeapi.org/api/timezone/'+ timeZoneSelector.value + '',{referrerPolicy: "unsafe_url"})
+    fetch('https://worldtimeapi.org/api/timezone/'+ timeZoneSelector.value + '')
     .then((res) => { return res.json(); })
     .then((data) => {
        
