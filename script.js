@@ -45,7 +45,7 @@ window.onload = () => {
 
 let newTimeZoneData = () => {
 
-    fetch('http://api.timezonedb.com/v2.1/get-time-zone?key=9V7W8217C8PV&format=json&by=zone&zone='+ timeZoneSelector.value + '')
+    fetch('https://api.timezonedb.com/v2.1/get-time-zone?key=9V7W8217C8PV&format=json&by=zone&zone='+ timeZoneSelector.value + '')
     .then((res) => { return res.json(); })
     .then((data) => {
        
