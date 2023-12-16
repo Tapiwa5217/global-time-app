@@ -20,19 +20,19 @@ let newOptionClass = document.getElementsByClassName('new-option-class');
 //load timezone options upon page loading
 window.onload = () => {
 
-         fetch('https://worldtimeapi.org/api/timezone')
+         fetch('https://api.timezonedb.com/v2.1/list-time-zone?key=9V7W8217C8PV&format=json')
          .then((res) => { return res.json(); })
          .then((data) => {   
-
-            for (let index = 0; index < data.length; index++) {
+            
+            for (let index = 0; index < data.zones.length; index++) {
             let newOption = document.createElement('option');
-            let optionText = document.createTextNode(data[index]);
+            let optionText = document.createTextNode(data.zones[index].zoneName);
             newOption.appendChild(optionText);
             newOption.classList.add('new-option-class');
             timeZoneSelector.appendChild(newOption);  
             
             //select GMT as default option
-            if(data[index] == 'Etc/GMT') {
+            if(data.zones[index].zoneName == 'Europe/London') {
                 newOptionClass[index].setAttribute('selected',"");
             }
         } 
@@ -45,7 +45,7 @@ window.onload = () => {
 
 let newTimeZoneData = () => {
 
-    fetch('https://worldtimeapi.org/api/timezone/'+ timeZoneSelector.value + '')
+    fetch('http://api.timezonedb.com/v2.1/get-time-zone?key=9V7W8217C8PV&format=json&by=zone&zone='+ timeZoneSelector.value + '')
     .then((res) => { return res.json(); })
     .then((data) => {
        
@@ -63,13 +63,13 @@ let newTimeZoneData = () => {
    //reflect data in time DOM  elements
        let timeZoneNode =timeZoneSelector.value;
        timeZone.insertAdjacentHTML('beforeend', timeZoneNode);
-       let hoursNode = parseInt(data.datetime.substring(11,13));
+       let hoursNode = parseInt(data.formatted.substring(11,13));
        hours.insertAdjacentHTML('beforeend',hoursNode);
-       let minutesNode = parseInt(data.datetime.substring(14,16));
+       let minutesNode = parseInt(data.formatted.substring(14,16));
        minutes.insertAdjacentHTML('beforeend',minutesNode);
-       let secondsNode = parseInt(data.datetime.substring(17,19));
+       let secondsNode = parseInt(data.formatted.substring(17,19));
        seconds.insertAdjacentHTML('beforeend',secondsNode);
-       let utcNode = parseInt(data.utc_offset.substring(0,3));
+       let utcNode = parseInt(data.dst);
        utc.insertAdjacentHTML('beforeend',utcNode);
        utc.insertAdjacentHTML('beforeend',' Hour');
        
@@ -126,18 +126,18 @@ let newTimeZoneData = () => {
         month.innerText = '';
         year.innerText = '';
 
-    let newDate = data.datetime.substring(0,10);
+    let newDate = data.formatted.substring(0,10);
     let currentDayName = getDay(new Date(newDate), 'en-US');
     let currentMonthName = getMonth(new Date(newDate), 'en-US');
 
        //reflect data in date dom elements
     let dayNameNode = document.createTextNode(currentDayName);
     dayName.appendChild(dayNameNode); 
-    let dayNode = document.createTextNode(data.datetime.substring(8,10));
+    let dayNode = document.createTextNode(data.formatted.substring(8,10));
      day.appendChild(dayNode); 
     let monthNameNode = document.createTextNode(currentMonthName);
       month.appendChild(monthNameNode);  
-    let yearNode = document.createTextNode(data.datetime.substring(0,4));
+    let yearNode = document.createTextNode(data.formatted.substring(0,4));
       year.appendChild(yearNode); 
     })
 }
