@@ -69,9 +69,17 @@ let newTimeZoneData = () => {
        minutes.insertAdjacentHTML('beforeend',minutesNode);
        let secondsNode = parseInt(data.formatted.substring(17,19));
        seconds.insertAdjacentHTML('beforeend',secondsNode);
-       let utcNode = parseInt(data.dst);
-       utc.insertAdjacentHTML('beforeend',utcNode);
-       utc.insertAdjacentHTML('beforeend',' Hour');
+       let utcNode = parseInt(data.gmtOffset)/3600;
+       utc.insertAdjacentHTML('beforeend',' GMT: ');
+
+       if(utcNode > 0) {
+        utc.insertAdjacentHTML('beforeend','+' + utcNode);
+       }
+       
+       else {
+        utc.insertAdjacentHTML('beforeend', utcNode);
+       }
+       
        
 
    //clear previous time interval from newInterval variable
