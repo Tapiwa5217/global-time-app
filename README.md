@@ -12,7 +12,7 @@ This is a simple timezone app built using JavaScript that allows users to choose
 ## Getting Started
 
     1. to get A Live Preview of the web app, click the link below.
-       https://tapiwa5217.github.io/global-time-app/
+       [Live Preview](https://tapiwa5217.github.io/global-time-app/)
 
     2. Select a timezone from the dropdown menu to view the associated information.
 
