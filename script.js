@@ -167,9 +167,9 @@ let getMonth = (date, locale) => {
 
 let selectImage = (hour) => {
     if (hour > 4 && hour < 18) {
-        body.style.backgroundImage = 'linear-gradient(rgba(0,0,0,.7),rgba(0,0,0,0.4)), url(/images/day-1.jpg)';
+        body.style.backgroundImage = 'linear-gradient(rgba(0,0,0,.7),rgba(0,0,0,0.4)), url(images/day-1.jpg)';
     }
     else {
-        body.style.backgroundImage = 'linear-gradient(rgba(0,0,0,.7),rgba(0,0,0,0.4)), url(/images/night-1.jpg)';
+        body.style.backgroundImage = 'linear-gradient(rgba(0,0,0,.7),rgba(0,0,0,0.4)), url(images/night-1.jpg)';
     }
 }
