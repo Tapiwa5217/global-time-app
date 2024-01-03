@@ -1,4 +1,5 @@
 //getting all HTML elements to JS file
+let body = document.querySelector('body');
 let timeZoneSelector = document.getElementById('timezone-selector');
 let selectButton = document.getElementById('select-button');
 let timeSection = document.getElementById('time-section');
@@ -135,7 +136,7 @@ let newTimeZoneData = () => {
         year.innerText = '';
 
     let newDate = data.formatted.substring(0,10);
-    let currentDayName = getDay(new Date(newDate), 'en-US');
+    let currentDayName = getDay(new Date(parseInt(newDate)+1), 'en-US');
     let currentMonthName = getMonth(new Date(newDate), 'en-US');
 
        //reflect data in date dom elements
@@ -147,7 +148,10 @@ let newTimeZoneData = () => {
       month.appendChild(monthNameNode);  
     let yearNode = document.createTextNode(data.formatted.substring(0,4));
       year.appendChild(yearNode); 
+
+      selectImage(hoursNode);
     })
+
 }
 //select timezone on button click
 selectButton.addEventListener('click', newTimeZoneData);
@@ -159,4 +163,13 @@ let getDay = (date, locale) => {
 
 let getMonth = (date, locale) => {
     return date.toLocaleDateString(locale, {month: 'long'});
+}
+
+let selectImage = (hour) => {
+    if (hour > 4 && hour < 18) {
+        body.style.backgroundImage = 'linear-gradient(rgba(0,0,0,.7),rgba(0,0,0,0.4)), url(../images/day-1.jpg)';
+    }
+    else {
+        body.style.backgroundImage = 'linear-gradient(rgba(0,0,0,.7),rgba(0,0,0,0.4)), url(../images/night-1.jpg)';
+    }
 }
